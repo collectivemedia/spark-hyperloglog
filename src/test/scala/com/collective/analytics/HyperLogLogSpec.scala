@@ -2,7 +2,8 @@ package com.collective.analytics
 
 import com.collective.analytics.schema.ImpressionLog
 import com.collective.analytics.schema.RowSyntax._
-import org.apache.spark.sql.HyperLogLogFn._
+import org.apache.spark.sql.hyperloglog.functions
+import functions._
 import org.apache.spark.sql.Row
 import org.scalatest.FlatSpec
 

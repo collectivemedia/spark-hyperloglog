@@ -1,4 +1,4 @@
-package org.apache.spark.sql
+package org.apache.spark.sql.hyperloglog
 
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream, DataInputStream, DataOutputStream}
 

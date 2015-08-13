@@ -1,7 +1,7 @@
 package com.collective.analytics
 
 import com.collective.analytics.schema.ImpressionLog
-import org.apache.spark.sql.HyperLogLogConfig
+import org.apache.spark.sql.hyperloglog.HyperLogLogConfig
 
 class InMemoryAudienceAnalytics(impressions: Vector[ImpressionLog]) extends AudienceAnalytics {
 

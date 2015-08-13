@@ -2,6 +2,7 @@ package com.collective.analytics
 
 import com.adroll.cantor.HLLCounter
 import com.collective.analytics.schema.{SegmentLog, ActivityLog}
+import org.apache.spark.sql.hyperloglog.functions
 
 
 class SparkAudienceAnalytics(aggregate: AggregateImpressionLog) extends AudienceAnalytics { self =>
@@ -10,7 +11,7 @@ class SparkAudienceAnalytics(aggregate: AggregateImpressionLog) extends Audience
   private lazy val segments = aggregate.segmentLog()
 
   import org.apache.spark.sql.functions._
-  import org.apache.spark.sql.HyperLogLogFn._
+  import functions._
   import com.collective.analytics.schema.RowSyntax._
 
   def audienceEstimate(ads: Vector[String], sites: Vector[String]): AudienceEstimate = {

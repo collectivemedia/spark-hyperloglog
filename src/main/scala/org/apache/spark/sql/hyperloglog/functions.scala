@@ -1,11 +1,12 @@
-package org.apache.spark.sql
+package org.apache.spark.sql.hyperloglog
 
+import org.apache.spark.sql.Column
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.functions._
 
 import scala.language.implicitConversions
 
-object HyperLogLogFn {
+object functions {
 
   private[this] implicit def toColumn(expr: Expression): Column = Column(expr)
 

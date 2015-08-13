@@ -1,7 +1,8 @@
 package com.collective.analytics.schema
 
 import org.apache.spark.sql
-import org.apache.spark.sql.{MergeHyperLogLog, Row}
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.hyperloglog.MergeHyperLogLog
 
 object RowSyntax {
 

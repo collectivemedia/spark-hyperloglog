@@ -2,6 +2,7 @@ package com.collective.analytics
 
 import com.collective.analytics.schema.{ActivityLog, SegmentLog, ImpressionLog}
 import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.hyperloglog.functions
 import org.slf4j.LoggerFactory
 
 class AggregateImpressionLog(impressionLog: DataFrame) extends Serializable {
@@ -17,7 +18,7 @@ class AggregateImpressionLog(impressionLog: DataFrame) extends Serializable {
     log.info(s"Compute activity log")
 
     import org.apache.spark.sql.functions._
-    import org.apache.spark.sql.HyperLogLogFn._
+    import functions._
 
     impressionLog.groupBy(
       col(ImpressionLog.ad_id)             as ActivityLog.ad_id,
@@ -39,7 +40,7 @@ class AggregateImpressionLog(impressionLog: DataFrame) extends Serializable {
     log.info(s"Compute segment log")
 
     import org.apache.spark.sql.functions._
-    import org.apache.spark.sql.HyperLogLogFn._
+    import functions._
 
     impressionLog.select(
       col(ImpressionLog.ad_id),
