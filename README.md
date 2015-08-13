@@ -11,3 +11,4 @@ Example project for Audience estimation using Spark and HyperLogLog
 By default tests are running with Spark in local mode
 
     sbt test
+
