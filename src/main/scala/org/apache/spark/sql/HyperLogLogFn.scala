@@ -5,7 +5,7 @@ import org.apache.spark.sql.functions._
 
 import scala.language.implicitConversions
 
-object HLLFunctions {
+object HyperLogLogFn {
 
   private[this] implicit def toColumn(expr: Expression): Column = Column(expr)
 

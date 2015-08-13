@@ -16,6 +16,8 @@ fork in Test := true
 
 // Resolvers
 
+resolvers += "Cloudera"            at "https://repository.cloudera.com/artifactory/cloudera-repos/"
+
 resolvers += "Collective Bintray"  at "https://dl.bintray.com/collectivemedia/releases"
 
 // Library Dependencies

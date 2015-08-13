@@ -1,15 +1,15 @@
 package com.collective.analytics
 
-import com.collective.analytics.schema.{ActivityLog, ImpressionLog}
+import com.collective.analytics.schema.{SegmentLog, ActivityLog, ImpressionLog}
 import org.apache.spark.sql.Row
 import org.scalatest.FlatSpec
 
 class AggregateImpressionLogSpec extends FlatSpec with EmbeddedSparkContext {
 
   private val impressions = Seq(
-    Row("bmw", "forbes.com", "cookie#1", 10L, 1L, Array("mk.a", "mk.b", "mk.c")),
-    Row("bmw", "forbes.com", "cookie#2", 5L, 2L, Array("mk.a", "mk.e", "mk.f")),
-    Row("bmw", "auto.com", "cookie#3", 7L, 0L, Array("mk.a", "mk.g", "mk.h"))
+    Row("bmw", "forbes.com", "cookie#1", 10L, 1L, Array("income:50000", "education:high-school", "interest:technology")),
+    Row("bmw", "forbes.com", "cookie#2", 5L, 2L, Array("income:50000", "education:college", "interest:auto")),
+    Row("bmw", "auto.com", "cookie#3", 7L, 0L, Array("income:100000", "education:high-school", "interest:auto"))
   )
 
   private val impressionLog =
@@ -31,6 +31,17 @@ class AggregateImpressionLogSpec extends FlatSpec with EmbeddedSparkContext {
     assert(bmwAtAuto.cookiesHLL.size() == 1)
     assert(bmwAtAuto.impressions == 7)
     assert(bmwAtAuto.clicks == 0)
+  }
+
+  it should "build segment log" in {
+    val segmentLog = aggregate.segmentLog().collect().map(SegmentLog.parse)
+
+    assert(segmentLog.length == 6)
+
+    val income50k = segmentLog.find(_.segment == "income:50000").get
+    assert(income50k.cookiesHLL.size() == 2)
+    assert(income50k.impressions == 15)
+    assert(income50k.clicks == 3)
   }
 
 }

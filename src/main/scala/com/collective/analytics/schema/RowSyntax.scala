@@ -11,6 +11,7 @@ object RowSyntax {
   trait LongColumn extends ColumnType
   trait StringColumn extends ColumnType
   trait BinaryColumn extends ColumnType
+  trait StringArrayColumn extends ColumnType
   trait HLLColumn extends ColumnType
 
   sealed trait ColumnReader[C <: ColumnType] { self =>
@@ -53,6 +54,14 @@ object RowSyntax {
     }
   }
 
+  class StringArrayReader[C <: ColumnType] extends ColumnReader[C] {
+    type Out = Array[String]
+    def read(row: Row)(idx: Int): Out = row(idx) match {
+      case null => Array.empty[String]
+      case arr: Array[_] => arr.map(_.toString)
+    }
+  }
+
   class BinaryReader[C <: ColumnType] extends ColumnReader[C] {
     type Out = Array[Byte]
 
@@ -66,6 +75,7 @@ object RowSyntax {
   implicit val intReader = new IntReader[IntColumn]
   implicit val longReader = new LongReader[LongColumn]
   implicit val stringReader = new StringReader[StringColumn]
+  implicit val stringArrayReader = new StringArrayReader[StringArrayColumn]
   implicit val binaryReader = new BinaryReader[BinaryColumn]
 
   implicit val cardinalityReader = new BinaryReader[HLLColumn] map { bytes =>

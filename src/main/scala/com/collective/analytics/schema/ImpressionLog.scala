@@ -1,6 +1,16 @@
 package com.collective.analytics.schema
 
+import org.apache.spark.sql.Row
 import org.apache.spark.sql.types._
+
+case class ImpressionLog(
+  adId: String,
+  siteId: String,
+  cookieId: String,
+  impressions: Long,
+  clicks: Long,
+  segments: Array[String]
+)
 
 object ImpressionLog { self =>
 
@@ -21,5 +31,16 @@ object ImpressionLog { self =>
   }
 
   val schema: StructType = StructType(Schema.fields)
+
+  import RowSyntax._
+
+  def parse(row: Row): ImpressionLog = ImpressionLog(
+    row.read[StringColumn](0),
+    row.read[StringColumn](1),
+    row.read[StringColumn](2),
+    row.read[LongColumn](3),
+    row.read[LongColumn](4),
+    row.read[StringArrayColumn](5)
+  )
 
 }
