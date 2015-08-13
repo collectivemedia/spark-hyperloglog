@@ -18,7 +18,7 @@ fork in Test := true
 
 resolvers += "Cloudera"            at "https://repository.cloudera.com/artifactory/cloudera-repos/"
 
-resolvers += "Collective Bintray"  at "https://bintray.com/artifact/download/collectivemedia/releases"
+resolvers += "Collective Bintray"  at "http://dl.bintray.com/collectivemedia/releases"
 
 // Library Dependencies
 
