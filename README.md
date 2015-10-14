@@ -2,7 +2,11 @@
 
 [![Build Status](https://travis-ci.org/collectivemedia/spark-hyperloglog.svg?branch=master)](https://travis-ci.org/collectivemedia/spark-hyperloglog)
 
-Interactive Audience Analytics with Spark and HyperLogLog
+Source code for blog post:
+
+- [Interactive Audience Analytics with Spark and HyperLogLog
+](https://databricks.com/blog/2015/10/13/interactive-audience-analytics-with-spark-and-hyperloglog.html
+)
 
 Example project for Audience estimation using Spark and HyperLogLog
 
