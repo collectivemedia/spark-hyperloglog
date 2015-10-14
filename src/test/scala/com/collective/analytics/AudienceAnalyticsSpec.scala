@@ -61,7 +61,7 @@ abstract class AudienceAnalyticsSpec extends FlatSpec with ShouldMatchers with D
 
     assert(intersection.size == 7)
     assert(intersection("interest:audi") == 0)
-    intersection("income:50000") should (be >= 190L and be <= 2010L)
+    intersection("income:50000") should (be >= 180L and be <= 2020L)
   }
 
 }
